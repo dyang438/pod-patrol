@@ -8,6 +8,8 @@ scale with high availability. However, Kubernetes deployments can become complex
 We're going to run a basic Kubernetes cluster locally using [k3d](https://k3d.io/stable/) and deploy a basic pre-written application to it. The pre-written application
 includes an intentional fault. You'll then create kuBERTnetes, a tool that should be able to diagnose the issue and suggest a fix.
 
+_NOTE: It's okay to use LLMs to complete this exercise (we use them all the time). IF you choose to use one, please make note of it in your email._
+
 ## Setup
 
 If you have a Windows machine, please email me because these steps might not work for you.
@@ -55,7 +57,7 @@ Here are the basic requirements:
 - It should be able to diagnose issues with the cluster.
 - It should be able to suggest fixes for issues.
 
-To give a brief overview of how we understand the state of Kubernetes clusters, let me outline some concepts. A Kubernetes cluster has a few key concepts. First, there is the concept of the control plane and the data plane. Kubernetes is an orchestation tool, so the control plane is responsible for making decsions about the cluster regarding the allocation of resources, scheduling, and other cluster-wide choices. The data plane is the part of the cluster that is actually running the applications. We define what we want a cluster to look like using a YAML file, which we call a "manifest". We then apply the manifest to the cluster using `kubectl apply -f <manifest>.yaml`. This defines what our desired application state is and then the control plane will start to make the necessary changes to the cluster to reach that state.
+To give a brief overview of how we understand the state of Kubernetes clusters, let me outline a few of the key concepts in Kubernetes. First, there's a separation of the cluster into the control plane and the data plane. Kubernetes is an orchestation tool, so the control plane is responsible for making decsions about the cluster regarding the allocation of resources, scheduling, and other cluster-wide choices. The data plane is the part of the cluster that is actually running the applications. We define what we want a cluster to look like using a YAML file, which we call a "manifest". We then apply the manifest to the cluster using `kubectl apply -f <manifest>.yaml`. This defines what our desired application state is and then the control plane will start to make the necessary changes to the cluster to reach that state.
 
 In our manifest, we define applications as a collection of containers that run together in a shared environment, called a namespace. They can network with each other, share volumes of disk space, and lots of other interesting stuff we don't need to get into now. When we apply the manifest to the cluster, the control plane will start to run the containers defined in the manifest in pods. Pods ultimately run on cluster level nodes, which are just the physical or virtualized machines that the cluster is running on.
 
@@ -75,5 +77,7 @@ In order to allow an LLM to access the state of the cluster, we need to provide 
 ## Evaluation
 
 After you are finished implementing your solution, please record a Loom video walking through both using the tool and your implementation of the tool. The more depth you're able to go into, the better - especially on any extensions you've implemented. Please email me a link to the Loom as well as a zip of the project directory.
+
+If you came across any errors in our setup or particularly tricky parts, please make note of that as well.
 
 Good luck!

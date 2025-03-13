@@ -8,6 +8,10 @@
 
 ## Setup Instructions
 
+### Step 0: Install homebrew
+
+If you don't have homebrew installed, please install it from here: https://brew.sh/
+
 ### 1. Install dependencies
 
 Install kubectl (CLI tool used to interact with Kubernetes clusters)
