@@ -1,0 +1,2 @@
+CANDIDATE_ANSWER_MODEL = "o3-mini"
+VERIFIER_MODEL = "gpt-4o-mini"

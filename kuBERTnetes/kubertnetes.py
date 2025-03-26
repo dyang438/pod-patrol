@@ -1,26 +1,41 @@
 # File: kubertnetes/kubertnetes.py
 
 from tap import Tap
-from gpt_wrapper import agent_wrapper
+from agent_wrapper import AgentWrapper
+from context_manager import ContextManager
+import asyncio
+from judge_agent import verify_candidates, candidate_answer_agent
 
-class kubertnetes_inputs(Tap):
+class KubertnetesInputs(Tap):
     question: str = ""
+    validate_solution: bool = False
+    candidate_num: int = 3
 
 async def main():
-    inputs = kubertnetes_inputs().parse_args()
-    agent = agent_wrapper()
-    while True:
+    inputs = KubertnetesInputs().parse_args()
+    starting_agent = AgentWrapper(candidate_answer_agent)
+    canonical_context = ContextManager()
+    while (1):
         if inputs.question == "":
-            inputs.question = input("Solve your kubernetes problem here:\n> ")
+            inputs.question = input("\n> ")
         else:
             print("You inputted question:\n" + "> " + inputs.question)
 
         # Grab Response here:
-        response = await agent.get_response(inputs.question)
-        print(response)
+        if inputs.question == "quit":
+            break
+        if inputs.validate_solution:
+            print("Validating solution...")
+            canonical_agent = await verify_candidates(inputs.question, inputs.candidate_num, canonical_context)
+            # Update canonical context
+            canonical_context = canonical_agent.context_manager
+            print("\n\n" + canonical_agent.result.final_output)
+        else:
+            response = await starting_agent.get_response(inputs.question)
+            print(response)
 
         """
-        Flow:
+        Ideal Flow:
         1. Get question from user input or command line args 
         1a. Santize/validate question
         2. Pass question to agent wrapper which handles LLM interaction
@@ -33,13 +48,10 @@ async def main():
         6. Reset question and continue loop
         """
 
-        # TODO:
-
-
         inputs.question = ""
     
+    print("Exiting...")
 
 
 if __name__ == "__main__":
-    import asyncio
     asyncio.run(main())
