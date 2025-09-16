@@ -142,7 +142,6 @@ The tool integrates with Kubernetes through:
 Set up your environment variables:
 ```bash
 export OPENAI_API_KEY="your-api-key"
-export ANTHROPIC_API_KEY="your-api-key"  # Optional: for Claude models
 ```
 
 ## Contributing
