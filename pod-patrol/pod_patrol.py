@@ -1,4 +1,4 @@
-# File: kubertnetes/kubertnetes.py
+# File: pod-patrol/pod_patrol.py
 
 from tap import Tap
 from agent_wrapper import AgentWrapper
@@ -6,13 +6,13 @@ from context_manager import ContextManager
 import asyncio
 from judge_agent import verify_candidates, candidate_answer_agent
 
-class KubertnetesInputs(Tap):
+class PodPatrolInputs(Tap):
     question: str = ""
     validate_solution: bool = False
     candidate_num: int = 3
 
 async def main():
-    inputs = KubertnetesInputs().parse_args()
+    inputs = PodPatrolInputs().parse_args()
     starting_agent = AgentWrapper(candidate_answer_agent)
     canonical_context = ContextManager()
     while (1):

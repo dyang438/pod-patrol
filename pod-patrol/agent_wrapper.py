@@ -1,4 +1,4 @@
-# File: kubertnetes/gpt_wrapper.py
+# File: pod-patrol/agent_wrapper.py
 
 from agents import Agent, Runner, RunConfig
 from context_manager import ContextManager
