@@ -144,14 +144,6 @@ Set up your environment variables:
 export OPENAI_API_KEY="your-api-key"
 ```
 
-## Contributing
-
-This project welcomes contributions! Areas of interest:
-- Additional kubectl tool integrations
-- Enhanced diagnostic algorithms
-- UI/UX improvements
-- Documentation and examples
-
 ## License
 
 MIT License - see LICENSE file for details.
